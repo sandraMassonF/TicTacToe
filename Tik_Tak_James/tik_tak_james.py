@@ -1,9 +1,31 @@
+# players
+players = [1, 2]
+user = "X"
+bot = "O"
+symbol = ""
+
 # tableau
 board = [["_", "_", "_"], ["_", "_", "_"], [" ", " ", " "]]
 line1 = board[0]
 line2 = board[1]
 line3 = board[2]
 
+# switch players between rounds
+def switch_player():
+    global tour
+    while tour < 6:
+        print("Tour numéro : ", tour)
+        for player in players:
+            if player == 1:
+                global symbol
+                symbol = user
+                print("Player 1, your move: ")
+            else:
+                symbol = bot
+                print("Player 2, your move: ")
+            moves()
+        tour += 1
+    
 # moves
 def moves():
     play1 = int(input("On which line do you wish to play ? (1,2,3) : "))
@@ -16,10 +38,10 @@ def moves():
         print("2- Error, Enter a number 1, 2 or 3")
         return play2
     else: 
-        #line 1
+        # line 1
         if play1 == 1:
             line1[play2 - 1] = symbol
-        #line 2
+        # line 2
         elif play1 == 2:
             line2[play2 - 1] = symbol
         # line 3
@@ -28,7 +50,7 @@ def moves():
         print("|".join(line1))
         print("|".join(line2))
         print("|".join(line3))
-
+    
 # starting the game
 def game():
     print("Welcome to Tik Tak Toe ! ")
@@ -42,6 +64,6 @@ def game():
         print("|".join(line1))
         print("|".join(line2))
         print("|".join(line3))
-        moves()
+        switch_player()
 
 game()
