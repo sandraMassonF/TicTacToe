@@ -1,3 +1,98 @@
+from random import *
+
+numero_1 = 0
+numero_2 = 0
+
+# Défini l'action de l'IA
+def ia_actions():    
+    numero_1 = randint(1, 3)
+    numero_2 = randint(1, 3)
+    # * ligne 1
+    if numero_1 == 1 and numero_2 == 1:
+        if ligne1[numero_2 - 1] == "_":
+            ligne1[numero_2 - 1] = symbole
+        else:
+            return ia_actions()
+    elif numero_1 == 1 and numero_2 == 2:
+        if ligne1[numero_2 - 1] == "_":
+            ligne1[numero_2 - 1] = symbole
+        else:
+            return ia_actions()
+    elif numero_1 == 1 and numero_2 == 3:
+        if ligne1[numero_2 - 1] == "_":
+            ligne1[numero_2 - 1] = symbole
+        else:
+            return ia_actions()
+    # * ligne 2
+    elif numero_1 == 2 and numero_2 == 1:
+        if ligne1[numero_2 - 1] == "_":
+            ligne1[numero_2 - 1] = symbole
+        else:
+            return ia_actions()
+    elif numero_1 == 2 and numero_2 == 2:
+        if ligne1[numero_2 - 1] == "_":
+            ligne1[numero_2 - 1] = symbole
+        else:
+            return ia_actions()
+    elif numero_1 == 2 and numero_2 == 3:
+        if ligne1[numero_2 - 1] == "_":
+            ligne1[numero_2 - 1] = symbole
+        else:
+            return ia_actions()
+    # * ligne 3
+    elif numero_1 == 3 and numero_2 == 1:
+        if ligne1[numero_2 - 1] == "_":
+            ligne1[numero_2 - 1] = symbole
+        else:
+            return ia_actions()
+    elif numero_1 == 3 and numero_2 == 2:
+        if ligne1[numero_2 - 1] == "_":
+            ligne1[numero_2 - 1] = symbole
+        else:
+            return ia_actions()
+    elif numero_1 == 3 and numero_2 == 3:
+        if ligne1[numero_2 - 1] == "_":
+            ligne1[numero_2 - 1] = symbole
+        else:
+            return ia_actions()
+    # Imprime le rendu du tableau au fur a mesure des actions des joueurs
+    print()
+    print("L'IA a joué ")
+    print()
+    print("|".join(ligne1))
+    print("|".join(ligne2))
+    print("|".join(ligne3))
+    print()
+
+# Changement de joueur avec IA
+def changement_ia():
+    global tour
+    global joueur_1
+    global joueur_2
+    global symbole
+    tour = 1
+    while verifie() != True and tour <= 10:
+        if tour % 2 == 1:
+            symbole = joueur_1
+            print("Joueur 1, c'est à ton tour de jouer!")
+            actions()
+        else:
+            symbole = joueur_2
+            ia_actions()
+        tour += 1
+    relancer_partie()
+
+# Lancement de l'IA 
+def lancement_ia():
+    print()
+    print("Vous jouez desormais contre une IA")
+    print("Bonne chance!")
+    print()
+    changement_ia()
+
+#################################################
+
+
 # joueurs
 joueur_1= "X"
 joueur_2= "O"
@@ -24,11 +119,15 @@ def efface():
     print("|".join(ligne2))
     print("|".join(ligne3))
     print()
-    changement_joueur()
+    if ia_rejouer == 1:
+        lancement_ia()
+    else:
+        changement_joueur()
 
 # Rejouer au jeu 
 def relancer_partie():
     global tour
+    global ia_rejouer
     print()
     rejouer = input("Souhaitez-vous rejouer ? ")
     print()
@@ -43,7 +142,9 @@ def relancer_partie():
         return relancer_partie()
     # Si le joueur souhaite jouer
     elif rejouer.lower() == "o" or rejouer.lower() == "oui":
-        efface()
+        ia_rejouer = input("Contre qui souhaitez-vous jouer ? [1] l'IA ? ou [2] un humain ? ")
+        if ia_rejouer == "1":
+            efface()
 
 # Vérifie si un joueur a une ligne gagnante OU si la partie est égalité
 def verifie():
@@ -116,6 +217,8 @@ def changement_joueur():
                                    
 # Défini l'action des joueurs ET vérifie si les informations demandées
 def actions():
+    global action_1
+    global action_2
     # Erreur qui apparait si les éléments demandés ne sont pas respecté
     while True:
         action_1 = int(input("Sur quelle ligne voulez-vous jouer ? (1,2,3) : "))
@@ -173,14 +276,33 @@ def actions():
     print("|".join(ligne3))
     print()
              
-# Lancement du jeu Tik Tak Toe
+# Lancement du jeu Tik Tak Toe avec 2 joueurs
 def lancement_jeu():
-    partie = input("Souhaitez-vous lancer une partie ? [O]ui / [N]on ")
+    global ia_partie
+    partie = input("Lancer une partie avec 2 joueurs ? [O]ui / [N]on ")
     print()
-    # Si le joueur ne souhaite pas jouer
+    # Si le joueur ne souhaite pas jouer à deux
     if partie.lower() == "n" or partie.lower() == "non" or partie.lower() == "no":
-        print("Aurevoir !")
-        print()
+        ia_partie = input("Souhaitez-vous tenter votre chance contre une IA ? [O]ui / [N]on ")
+        if ia_partie.lower() == "o" or ia_partie.lower() == "oui":
+            # Imprime le modèle du tableau
+            print()
+            print("|".join(ligne1))
+            print("|".join(ligne2))
+            print("|".join(ligne3))
+            print()
+            lancement_ia()
+        # Erreur si le joueur entre une lettre non demandé
+        elif partie.lower() != "o" and partie.lower() != "oui" \
+        and partie.lower() != "n" and partie.lower() != "non" and partie.lower() != "no":
+            print("Erreur! Entrez [O]ui ou [N]on ")
+            print()
+            return lancement_jeu()
+        elif ia_partie.lower() == "n" or ia_partie.lower() == "non" \
+        or ia_partie.lower() == "no":
+            print()
+            print("Aurevoir!")
+            print()
     # Erreur si le joueur entre une lettre non demandé
     elif partie.lower() != "o" and partie.lower() != "oui" \
     and partie.lower() != "n" and partie.lower() != "non" and partie.lower() != "no":
