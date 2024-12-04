@@ -9,6 +9,42 @@ ligne1 = board[0]
 ligne2 = board[1]
 ligne3 = board[2]
 
+
+# Efface le tableau d'une partie terminée
+def efface():
+    global ligne1
+    global ligne2
+    global ligne3
+    global board
+    board = [["_", "_", "_"], ["_", "_", "_"], ["_", "_", "_"]]
+    ligne1 = board[0]
+    ligne2 = board[1]
+    ligne3 = board[2]
+    print("|".join(ligne1))
+    print("|".join(ligne2))
+    print("|".join(ligne3))
+    print()
+    changement_joueur()
+
+# Rejouer au jeu 
+def relancer_partie():
+    global tour
+    print()
+    rejouer = input("Souhaitez-vous rejouer ? ")
+    print()
+    if rejouer.lower() == "n" or rejouer.lower() == "non" or rejouer.lower() == "no":
+        print("Aurevoir !")
+        print()
+    # Erreur si le joueur entre une lettre non demandé
+    elif rejouer.lower() != "o" and rejouer.lower() != "oui" \
+    and rejouer.lower() != "n" and rejouer.lower() != "non" and rejouer.lower() != "no":
+        print("Erreur! Entrez [O]ui ou [N]on ")
+        print()
+        return lancement_jeu()
+    # Si le joueur souhaite jouer
+    elif rejouer.lower() == "o" or rejouer.lower() == "oui":
+        efface()
+
 # Vérifie si un joueur a une ligne gagnante OU si la partie est égalité
 def verifie():
     # Joueur 1 - vérification horizontale
@@ -16,45 +52,46 @@ def verifie():
     or board[1] == ["X", "X", "X"] \
     or board[2] == ["X", "X", "X"]:
         print("HOORAY!")
-        print("Joueur 1 gagne")
+        print("Joueur 1 gagne !")
         return True
     # Joueur 1 - vérification verticale
     elif board[0][0] == joueur_1 and board[1][0] == joueur_1 and board[2][0] == joueur_1 \
     or board[0][1] == joueur_1 and board[1][1] == joueur_1 and board[2][1] == joueur_1 \
     or board[0][2] == joueur_1 and board[1][2] == joueur_1 and board[2][2] == joueur_1:
         print("HOORAY!")
-        print("Joueur 1 gagne")
+        print("Joueur 1 gagne !")
         return True
     # Joueur 1 - vérification diagonale
     elif board[0][0] == joueur_1 and board[1][1] == joueur_1 and board[2][2] == joueur_1 \
     or board[0][2] == joueur_1 and board[1][1] == joueur_1 and board[2][0] == joueur_1:
         print("HOORAY!")
-        print("Joueur 1 gagne")
+        print("Joueur 1 gagne !")
         return True
     # Joueur 2 - vérification horizontale
     if board[0] == ["O", "O", "O"] \
     or board[1] == ["O", "O", "O"] \
     or board[2] == ["O", "O", "O"]:
         print("HOORAY!")
-        print("Joueur 2 gagne")
+        print("Joueur 2 gagne !")
         return True
     # Joueur 2 - vérification verticale
     elif board[0][0] == joueur_2 and board[1][0] == joueur_2 and board[2][0] == joueur_2 \
     or board[0][1] == joueur_2 and board[1][1] == joueur_2 and board[2][1] == joueur_2 \
     or board[0][2] == joueur_2 and board[1][2] == joueur_2 and board[2][2] == joueur_2:
         print("HOORAY!")
-        print("Joueur 2 gagne")
+        print("Joueur 2 gagne !")
         return True
     # Joueur 2 - vérification diagonale
     elif board[0][0] == joueur_2 and board[1][1] == joueur_2 and board[2][2] == joueur_2 \
     or board[0][2] == joueur_2 and board[1][1] == joueur_2 and board[2][0] == joueur_2:
         print("HOORAY!")
-        print("Joueur 2 gagne")
+        print("Joueur 2 gagne !")
         return True
     # Vérification d'une égalité
     elif tour == 10:
         print("C'est une égalite !")
         print()
+        return True
     else:
         return False
 
@@ -74,6 +111,8 @@ def changement_joueur():
             print("Joueur 2, c'est à ton tour de jouer!")
         actions()
         tour += 1
+    relancer_partie()
+    
                                    
 # Défini l'action des joueurs ET vérifie si les informations demandées
 def actions():
