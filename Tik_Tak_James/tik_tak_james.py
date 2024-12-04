@@ -40,7 +40,7 @@ def relancer_partie():
     and rejouer.lower() != "n" and rejouer.lower() != "non" and rejouer.lower() != "no":
         print("Erreur! Entrez [O]ui ou [N]on ")
         print()
-        return lancement_jeu()
+        return relancer_partie()
     # Si le joueur souhaite jouer
     elif rejouer.lower() == "o" or rejouer.lower() == "oui":
         efface()
