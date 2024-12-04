@@ -52,7 +52,7 @@ def condition_victoire(ligne1, ligne2, ligne3, joueur):
     print(message_victoire)
        
 # Vérification si case occupée
-def occuper(selection_ligne, selection_colonne):
+def occuper(selection_ligne, selection_colonne, joueur):
     global case_prise
     case_occupe = []    
     case_occupe.append(selection_ligne) 
@@ -60,7 +60,9 @@ def occuper(selection_ligne, selection_colonne):
     if case_occupe in total_selection:
         print("cette case à déjà été joué")
         print(total_selection)
+        tour_joueur(joueur)
         case_prise = "True"
+
     else:
         total_selection.append(case_occupe)
         print(total_selection)
@@ -85,6 +87,14 @@ def choix_joueur():
         print("Le symbole entré n'est pas valide ! ")
         choix_joueur()
         
+# on vérifie que la saisi est OK:
+def verification_saisie(selection_ligne, selection_colonne, joueur):
+    if selection_ligne > 3 or selection_ligne < 1 \
+    or selection_colonne > 3 \
+    or selection_colonne < 1:
+        print("le chiffre entré est invalide !")
+        tour_joueur(joueur)
+
 # JOUEUR 1
 # demande des cohordonnés
 def tour_joueur(joueur):
@@ -94,26 +104,21 @@ def tour_joueur(joueur):
     selection_ligne = int(input("Choisissez dans quelle ligne (chiffre entre 1 et 3): "))
     selection_colonne = int(input("Choisissez dans quelle colone (chiffre entre 1 et 3): "))
     # on vérifie que la saisi est OK:
-    if selection_ligne > 3 or selection_ligne < 1 \
-    or selection_colonne > 3 \
-    or selection_colonne < 1:
-        print("le chiffre entré est invalide !")
-        tour_joueur(joueur)
-    else:
-        # on vérifie si la case est occupée 
-        occuper(selection_ligne,selection_colonne)
-        
-        if selection_ligne == 1:
-            ligne1[selection_colonne-1] = joueur
+    verification_saisie(selection_ligne, selection_colonne, joueur)
+    # on vérifie si la case est occupée:
+    occuper(selection_ligne,selection_colonne, joueur)
+    # on ecrit la selection du joueur dans la grille:
+    if selection_ligne == 1:
+        ligne1[selection_colonne-1] = joueur
                     
-        elif selection_ligne == 2:
-            ligne2[selection_colonne-1] = joueur
+    elif selection_ligne == 2:
+        ligne2[selection_colonne-1] = joueur
                     
-        elif selection_ligne == 3:
-            ligne3[selection_colonne-1] = joueur        
-        # mise à jour de la grille
-        grille()
-        condition_victoire(ligne1, ligne2, ligne3, joueur)
+    elif selection_ligne == 3:
+        ligne3[selection_colonne-1] = joueur        
+    # mise à jour de la grille
+    grille()
+    condition_victoire(ligne1, ligne2, ligne3, joueur)
 
 # selection de la ligne joué
 def turn_game():
