@@ -9,49 +9,49 @@ def ia_actions():
     numero_2 = randint(1, 3)
     # * ligne 1
     if numero_1 == 1 and numero_2 == 1:
-        if ligne1[numero_2 - 1] == "_":
+        if ligne1[numero_2 - 1] == "-":
             ligne1[numero_2 - 1] = symbole
         else:
             return ia_actions()
     elif numero_1 == 1 and numero_2 == 2:
-        if ligne1[numero_2 - 1] == "_":
+        if ligne1[numero_2 - 1] == "-":
             ligne1[numero_2 - 1] = symbole
         else:
             return ia_actions()
     elif numero_1 == 1 and numero_2 == 3:
-        if ligne1[numero_2 - 1] == "_":
+        if ligne1[numero_2 - 1] == "-":
             ligne1[numero_2 - 1] = symbole
         else:
             return ia_actions()
     # * ligne 2
     elif numero_1 == 2 and numero_2 == 1:
-        if ligne1[numero_2 - 1] == "_":
+        if ligne1[numero_2 - 1] == "-":
             ligne1[numero_2 - 1] = symbole
         else:
             return ia_actions()
     elif numero_1 == 2 and numero_2 == 2:
-        if ligne1[numero_2 - 1] == "_":
+        if ligne1[numero_2 - 1] == "-":
             ligne1[numero_2 - 1] = symbole
         else:
             return ia_actions()
     elif numero_1 == 2 and numero_2 == 3:
-        if ligne1[numero_2 - 1] == "_":
+        if ligne1[numero_2 - 1] == "-":
             ligne1[numero_2 - 1] = symbole
         else:
             return ia_actions()
     # * ligne 3
     elif numero_1 == 3 and numero_2 == 1:
-        if ligne1[numero_2 - 1] == "_":
+        if ligne1[numero_2 - 1] == "-":
             ligne1[numero_2 - 1] = symbole
         else:
             return ia_actions()
     elif numero_1 == 3 and numero_2 == 2:
-        if ligne1[numero_2 - 1] == "_":
+        if ligne1[numero_2 - 1] == "-":
             ligne1[numero_2 - 1] = symbole
         else:
             return ia_actions()
     elif numero_1 == 3 and numero_2 == 3:
-        if ligne1[numero_2 - 1] == "_":
+        if ligne1[numero_2 - 1] == "-":
             ligne1[numero_2 - 1] = symbole
         else:
             return ia_actions()
@@ -59,9 +59,9 @@ def ia_actions():
     print()
     print("L'IA a joué ")
     print()
-    print("|".join(ligne1))
-    print("|".join(ligne2))
-    print("|".join(ligne3))
+    print(" | ".join(ligne1))
+    print(" | ".join(ligne2))
+    print(" | ".join(ligne3))
     print()
 
 # Changement de joueur avec IA
@@ -98,7 +98,7 @@ joueur_2= "O"
 symbole = ""
 
 # tableau
-board = [["_", "_", "_"], ["_", "_", "_"], ["_", "_", "_"]]
+board = [["-", "-", "-"], ["-", "-", "-"], ["-", "-", "-"]]
 ligne1 = board[0]
 ligne2 = board[1]
 ligne3 = board[2]
@@ -109,13 +109,13 @@ def efface():
     global ligne2
     global ligne3
     global board
-    board = [["_", "_", "_"], ["_", "_", "_"], ["_", "_", "_"]]
+    board = [["-", "-", "-"], ["-", "-", "-"], ["-", "-", "-"]]
     ligne1 = board[0]
     ligne2 = board[1]
     ligne3 = board[2]
-    print("|".join(ligne1))
-    print("|".join(ligne2))
-    print("|".join(ligne3))
+    print(" | ".join(ligne1))
+    print(" | ".join(ligne2))
+    print(" | ".join(ligne3))
     print()
     if ia_rejouer == 1:
         lancement_ia()
@@ -240,7 +240,7 @@ def actions():
     # Détermine une action en ligne 1 
     # ET une erreur si l'emplacement est déjà occupé par l'adversaire
     if action_1 == 1:
-        if ligne1[action_2 - 1] == "_":
+        if ligne1[action_2 - 1] == "-":
             ligne1[action_2 - 1] = symbole
         else:
             print()
@@ -251,7 +251,7 @@ def actions():
     # Détermine une action en ligne 2 
     # ET une erreur si l'emplacement est déjà occupé par l'adversaire
     elif action_1 == 2:
-        if ligne2[action_2 - 1] == "_":
+        if ligne2[action_2 - 1] == "-":
             ligne2[action_2 - 1] = symbole
         else:
             print()
@@ -262,7 +262,7 @@ def actions():
     # Détermine une action en ligne 3 
     # ET une erreur si l'emplacement est déjà occupé par l'adversaire
     elif action_1 == 3:
-        if ligne3[action_2 - 1] == "_":
+        if ligne3[action_2 - 1] == "-":
             ligne3[action_2 - 1] = symbole
         else:
             print()
@@ -272,9 +272,9 @@ def actions():
             return actions()
     # Imprime le rendu du tableau au fur a mesure des actions des joueurs
     print()
-    print("|".join(ligne1))
-    print("|".join(ligne2))
-    print("|".join(ligne3))
+    print(" | ".join(ligne1))
+    print(" | ".join(ligne2))
+    print(" | ".join(ligne3))
     print()
 
 def lancement_jeu():
@@ -286,17 +286,17 @@ def lancement_jeu():
     if partie == 1:
         # Imprime le modèle du tableau
         print()
-        print("|".join(ligne1))
-        print("|".join(ligne2))
-        print("|".join(ligne3))
+        print(" | ".join(ligne1))
+        print(" | ".join(ligne2))
+        print(" | ".join(ligne3))
         print()
         lancement_ia()
     # Si le joueur choisi de jouer contre un joueur réel
     elif partie == 2:
         # Imprime le modèle du tableau
-        print("|".join(ligne1))
-        print("|".join(ligne2))
-        print("|".join(ligne3))
+        print(" | ".join(ligne1))
+        print(" | ".join(ligne2))
+        print(" | ".join(ligne3))
         print()
         changement_joueur()
     # Affiche une erreur si le numéro entré n'est pas celui demandé
