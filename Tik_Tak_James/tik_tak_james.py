@@ -92,7 +92,6 @@ def lancement_ia():
 
 #################################################
 
-
 # joueurs
 joueur_1= "X"
 joueur_2= "O"
@@ -103,7 +102,6 @@ board = [["_", "_", "_"], ["_", "_", "_"], ["_", "_", "_"]]
 ligne1 = board[0]
 ligne2 = board[1]
 ligne3 = board[2]
-
 
 # Efface le tableau d'une partie terminée
 def efface():
@@ -202,6 +200,9 @@ def changement_joueur():
     global joueur_1
     global joueur_2
     global symbole
+    print("Vous jouez désormais contre un joueur")
+    print("Bonne Chance !")
+    print()
     tour = 1
     while verifie() != True and tour <= 10:
         if tour % 2 == 1:
@@ -275,49 +276,38 @@ def actions():
     print("|".join(ligne2))
     print("|".join(ligne3))
     print()
-             
-# Lancement du jeu Tik Tak Toe avec 2 joueurs
+
 def lancement_jeu():
-    global ia_partie
-    partie = input("Lancer une partie avec 2 joueurs ? [O]ui / [N]on ")
+    print("Commencer une partie contre: ")
     print()
-    # Si le joueur ne souhaite pas jouer à deux
-    if partie.lower() == "n" or partie.lower() == "non" or partie.lower() == "no":
-        ia_partie = input("Souhaitez-vous tenter votre chance contre une IA ? [O]ui / [N]on ")
-        if ia_partie.lower() == "o" or ia_partie.lower() == "oui":
-            # Imprime le modèle du tableau
-            print()
-            print("|".join(ligne1))
-            print("|".join(ligne2))
-            print("|".join(ligne3))
-            print()
-            lancement_ia()
-        # Erreur si le joueur entre une lettre non demandé
-        elif partie.lower() != "o" and partie.lower() != "oui" \
-        and partie.lower() != "n" and partie.lower() != "non" and partie.lower() != "no":
-            print("Erreur! Entrez [O]ui ou [N]on ")
-            print()
-            return lancement_jeu()
-        elif ia_partie.lower() == "n" or ia_partie.lower() == "non" \
-        or ia_partie.lower() == "no":
-            print()
-            print("Aurevoir!")
-            print()
-    # Erreur si le joueur entre une lettre non demandé
-    elif partie.lower() != "o" and partie.lower() != "oui" \
-    and partie.lower() != "n" and partie.lower() != "non" and partie.lower() != "no":
-        print("Erreur! Entrez [O]ui ou [N]on ")
+    partie = int(input("[1] une IA ou [2] un joueur : "))
+    print()
+    # Si le joueur choisi de jouer contre une IA
+    if partie == 1:
+        # Imprime le modèle du tableau
         print()
-        return lancement_jeu()
-    # Si le joueur souhaite jouer
-    elif partie.lower() == "o" or partie.lower() == "oui":
+        print("|".join(ligne1))
+        print("|".join(ligne2))
+        print("|".join(ligne3))
+        print()
+        lancement_ia()
+    # Si le joueur choisi de jouer contre un joueur réel
+    elif partie == 2:
         # Imprime le modèle du tableau
         print("|".join(ligne1))
         print("|".join(ligne2))
         print("|".join(ligne3))
         print()
         changement_joueur()
-
+    # Affiche une erreur si le numéro entré n'est pas celui demandé
+    else:
+        print("! ERREUR !")
+        print("Saisissez 1 ou 2")
+        print("[1] Pour jouer contre une IA")
+        print("[2] pour jouer contre un adversaire réel")
+        print()
+        return lancement_jeu()
+        
 # Pré-lancement du jeu - Message d'Accueil
 def pre_lancement():
     print()
