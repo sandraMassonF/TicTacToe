@@ -17,7 +17,6 @@ def grille():
     print("|".join(ligne3))
 grille()
 
-
 # condition de victoire
 def condition_victoire(ligne1, ligne2, ligne3, joueur):
     global victoire
@@ -91,32 +90,29 @@ def occuper(selection_ligne, selection_colonne, joueur):
         print(total_selection)
         case_prise = True
         tour_joueur(joueur)
-
     else:
         total_selection.append(case_occupe)
-        print(total_selection)
+        # on ecrit la selection du joueur dans la grille:
+        if case_prise != True:
+            if selection_ligne == 1:
+                ligne1[selection_colonne-1] = joueur              
+            elif selection_ligne == 2:
+                ligne2[selection_colonne-1] = joueur              
+            elif selection_ligne == 3:
+                ligne3[selection_colonne-1] = joueur        
 
 # demande des chiffres
 def tour_joueur(joueur):
-    global case_prise
     print(f"Joueur {joueur}")
     selection_ligne = int(input("Choisissez dans quelle ligne (chiffre entre 1 et 3): "))
     selection_colonne = int(input("Choisissez dans quelle colonne (chiffre entre 1 et 3): "))
     # on vérifie que la saisi est OK:
     verification_saisie(selection_ligne, selection_colonne, joueur)
     # on vérifie si la case est occupée:
-    occuper(selection_ligne,selection_colonne, joueur)
-    # on ecrit la selection du joueur dans la grille:
-    if case_prise != True:
-        if selection_ligne == 1:
-            ligne1[selection_colonne-1] = joueur              
-        elif selection_ligne == 2:
-            ligne2[selection_colonne-1] = joueur              
-        elif selection_ligne == 3:
-            ligne3[selection_colonne-1] = joueur        
-        # mise à jour de la grille
-        grille()
-        condition_victoire(ligne1, ligne2, ligne3, joueur)
+    occuper(selection_ligne,selection_colonne, joueur)        
+    # mise à jour de la grille
+    grille()
+    condition_victoire(ligne1, ligne2, ligne3, joueur)
 
 # restart partie
 def restart():
@@ -145,7 +141,6 @@ def restart():
         print("|_|_|_|_|_|")
         quit()
        
-
 # selection de la ligne joué
 def start_game():
     choix_joueur()
