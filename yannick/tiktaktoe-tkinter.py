@@ -165,4 +165,3 @@ def start_game():
             tour_joueur(joueur2)
         
 start_game()
-
